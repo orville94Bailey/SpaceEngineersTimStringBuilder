@@ -21,28 +21,11 @@
             </div>
             <button class="btn btn-primary" id="searchButton">Search</button>
         </div>
-        {{#each componentList}}
-        <div class="row justify-content-center my-3" data-search-filter="{{Block}}">
-            <div class="card col-5" >
-                <div class="card-title">
-                    <h5>
-                        {{Block}}
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="{{Block}}">Quantity</label>
-                        <input type="number" class="form-control" id="{{Block}}">
-                    </div>
-                    {{#each Components}}
-                        {{#if this.Quantity}}
-                            <sub>{{this.Name}} : {{this.Quantity}}</sub>
-                        {{/if}}
-                    {{/each}}
-                </div>
-            </div>
+        <div class="row justify-content-center my-3">
+            {{#each componentList}}
+                {{> componentBlock this}}
+            {{/each}}
         </div>
-        {{/each}}
     </form>
 </div>
 
@@ -53,9 +36,9 @@
             let cards = $('[data-search-filter]').toArray();
             cards.forEach(card=>{
                 if (card.dataset.searchFilter.toLowerCase().indexOf($('#searchBox').val().toLowerCase()) < 0) {
-                    $(card).hide();
+                    $(card).fadeOut(450)
                 } else {
-                    $(card).show();
+                    $(card).fadeIn(600)
                 }
             })
         })

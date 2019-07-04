@@ -1,0 +1,19 @@
+
+<div class="card col-3 m-1"  data-search-filter="{{Block}}">
+    <div class="card-title">
+        <h5>
+            {{Block}}
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="{{Block}}">Quantity</label>
+            <input type="number" class="form-control" id="{{Block}}">
+        </div>
+        {{#each Components}}
+            {{#if this.Quantity}}
+                <sub>{{this.Name}} : {{this.Quantity}}</sub>
+            {{/if}}
+        {{/each}}
+    </div>
+</div>

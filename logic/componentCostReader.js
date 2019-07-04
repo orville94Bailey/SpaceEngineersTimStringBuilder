@@ -117,9 +117,6 @@ function translate() {
             ]
         }
     })
-
-    reader.otherJson.forEach(x=>console.log(x))
-
 }
 
 module.exports = reader;

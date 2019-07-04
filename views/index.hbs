@@ -14,22 +14,50 @@
             Hopefully you'll find this tool as useful as I do.</p>
         </div>
     </div>
-    {{#each componentList}}
-    <div class="row justify-content-center">
-        <div class="card col-5">
-            <div class="card-title">
-                <h5>
-                    {{Block}}
-                </h5>
+    <form action="">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <input type="text" class="form-control" id="searchBox">
             </div>
-            <div class="card-body">
-                {{#each Components}}
-                    {{#if this.Quantity}}
-                        <sub>{{this.Name}} : {{this.Quantity}}</sub>
-                    {{/if}}
-                {{/each}}
+            <button class="btn btn-primary" id="searchButton">Search</button>
+        </div>
+        {{#each componentList}}
+        <div class="row justify-content-center my-3" data-search-filter="{{Block}}">
+            <div class="card col-5" >
+                <div class="card-title">
+                    <h5>
+                        {{Block}}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="{{Block}}">Quantity</label>
+                        <input type="number" class="form-control" id="{{Block}}">
+                    </div>
+                    {{#each Components}}
+                        {{#if this.Quantity}}
+                            <sub>{{this.Name}} : {{this.Quantity}}</sub>
+                        {{/if}}
+                    {{/each}}
+                </div>
             </div>
         </div>
-    </div>
-    {{/each}}
+        {{/each}}
+    </form>
 </div>
+
+<script>
+    $(document).ready(()=>{
+        $('#searchButton').click(event=>{
+            event.preventDefault();
+            let cards = $('[data-search-filter]').toArray();
+            cards.forEach(card=>{
+                if (card.dataset.searchFilter.toLowerCase().indexOf($('#searchBox').val().toLowerCase()) < 0) {
+                    $(card).hide();
+                } else {
+                    $(card).show();
+                }
+            })
+        })
+    })
+</script>
